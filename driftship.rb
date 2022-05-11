@@ -1,7 +1,12 @@
 require 'gosu'
+#big size
+#$width = 1280
+#$height = 720
+#standard size
+$width = 640
+$height = 480
 
-$width = 800
-$height = 600
+$wrap = false
 
 class GameWindow < Gosu::Window
   def initialize(width=$width, height=$height, fullscreen=false)
@@ -97,13 +102,16 @@ class Player
   def move
     @x += @vel_x
     @y += @vel_y
-    #@x %= $width
-    #@y %= $height
 
     @vel_x *= @friction
     @vel_y *= @friction
 
-    warp($width/2, $height/2) if @x > $width or @x < 0.0 or @y > $height or @y < 0.0
+    if $wrap
+      @x %= $width
+      @y %= $height
+    else
+      warp($width/2, $height/2) if @x > $width or @x < 0.0 or @y > $height or @y < 0.0
+    end
 
   end
 
@@ -126,8 +134,8 @@ class Star
     #@color.red = rand(256 - 40) + 40
     #@color.green = rand(256 - 40) + 40
     #@color.blue = rand(256 - 40) + 40
-    @x = (0.8 * rand + 0.1) * $width
-    @y = (0.8 * rand + 0.1) * $height
+    @x = (0.9 * rand + 0.05) * $width
+    @y = (0.9 * rand + 0.05) * $height
   end
 
   def draw
