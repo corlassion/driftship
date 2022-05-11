@@ -6,7 +6,7 @@ require 'gosu'
 $width = 640
 $height = 480
 
-$wrap = false
+$wrap = true
 
 class GameWindow < Gosu::Window
   def initialize(width=$width, height=$height, fullscreen=false)
@@ -27,7 +27,7 @@ class GameWindow < Gosu::Window
         if Gosu.button_down? Gosu::KB_D or Gosu::button_down? Gosu::GP_RIGHT
           @player.turn_right
         end
-        if Gosu.button_down? Gosu::KB_W or Gosu::button_down? Gosu::GP_UP
+        if Gosu.button_down? Gosu::KB_W or Gosu::button_down? Gosu::GP_BUTTON_0
           @player.accelerate
         end
         @player.move
